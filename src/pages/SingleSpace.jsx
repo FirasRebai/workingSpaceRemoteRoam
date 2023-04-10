@@ -1,9 +1,37 @@
-import React, { Component } from 'react'
+import React, { useContext } from "react";
+import defaultBcg from "../images/room-1.jpeg";
+import Hero from "../components/Hero";
+import Banner from "../components/Banner";
+import { Link, useParams } from "react-router-dom";
+import { RoomContext } from "../context";
 
-export default class SingleSpace extends Component {
-  render() {
+const SingleSpace = () => {
+  const { slug } = useParams();
+  const { getRoom } = useContext(RoomContext);
+  const room = getRoom(slug);
+
+  if (!room) {
     return (
-      <div>hello from single space page</div>
-    )
+      <div className="error">
+        <h3>no such space could be found...</h3>
+        <Link to="/rooms" className="btn-primary">
+          back to rooms
+        </Link>
+      </div>
+    );
   }
-}
+
+  const { name, description, capacity, size, price, extras, breakfast, pets, images } = room;
+
+  return (
+    <Hero hero="roomsHero" img={images[0] || defaultBcg}>
+      <Banner title={`${name} room`}>
+        <Link to="/coworking-space" className="btn-primary">
+          back to rooms
+        </Link>
+      </Banner>
+    </Hero>
+  );
+};
+
+export default SingleSpace;
