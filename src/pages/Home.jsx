@@ -16,9 +16,9 @@ export default function Home() {
           </Link>
         </Banner>
       </Hero>
-      <Services/>
+      <Services />
       <Testimonials />
-      <FeaturedRooms/>
+      <FeaturedRooms />
     </>
   );
 }
